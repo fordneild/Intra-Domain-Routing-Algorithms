@@ -9,7 +9,7 @@ from collections import defaultdict
 from router import Router
 from packet import Packet
 from json import dumps, loads
-
+import networkx as nx
 
 class LSrouter(Router):
     """Link state routing protocol implementation."""
@@ -19,22 +19,19 @@ class LSrouter(Router):
         Router.__init__(self, addr)  # initialize superclass - don't remove
         self.heartbeatTime = heartbeatTime
         self.last_time = 0
-        #save the addr so that we can index into local state properly
-        #self.addr = addr
+        self.nx = nx.Graph()
+        self.nx.add_node(addr)
+        self.forward = {}
+
         # Hints: initialize local state
         # The below is from the README.md
         # Each router keeps its own link state and other nodes' link states it receives. 
         # The link state of a router contains the links and their weights between the router and its neighbors.
         # could use dict that looks like this:
-        # self.localState = {
-        #   addr1: linkStateOfThisAddress
-        #   addr2: linkStateOfThisAddress
-        # }
 
-        # linkStateOfThisAddress = {
-        #   addressOfNeighbor1: weight of path to this neighbor
-        #   addressOfNeighbor2: weight of path to this neighbor
-        # }
+        # forwarding table
+        # key: router name
+        # value: 
         pass
 
 
@@ -58,7 +55,13 @@ class LSrouter(Router):
     def handleNewLink(self, port, endpoint, cost):
         """TODO: handle new link"""
         # Hints:
+        # update local link state
+        if(not self.nx.has_node(endpoint)):
+            self.nx.add_node(endpoint)
+        self.nx.add_edge(self.addr, endpoint, cost=cost, port=port)
         # update the forwarding table
+
+
         # broadcast the new link state of this router to all neighbors
         pass
 
@@ -67,6 +70,10 @@ class LSrouter(Router):
         """TODO: handle removed link"""
         # Hints:
         # update the forwarding table
+        try:
+            self.nx.remove_edge(self.addr, endpoint)
+        except expression as identifier:
+            print "could not remove edge: " + self.addr + "," + 
         # broadcast the new link state of this router to all neighbors
         pass
 
@@ -82,4 +89,11 @@ class LSrouter(Router):
 
     def debugString(self):
         """TODO: generate a string for debugging in network visualizer"""
-        return ""
+        res = ""
+        # res = str(self.links)+"\n"
+        # for port, link in self.links.items():
+        #     res = res + "Port "+str(port)+": "+ str(link.e1) + "," + str(link.e2) + "\n"
+        # return res
+        for line in nx.generate_edgelist(self.nx, data=True):
+            res = res + line + "\n"
+        return res
