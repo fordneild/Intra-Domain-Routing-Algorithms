@@ -1,6 +1,5 @@
-# Assignment 3: Intra-Domain Routing Algorithms
+Intra-Domain Routing Algorithms
 
-### Due: Tuesday, November 10
 
 The Internet is composed of many independent networks (called autonomous systems) that must cooperate in order for packets to reach their destinations.  This necessitates different protocols and algorithms for routing packet within autonomous systems, where all routers are operated by the same entity, and between autonomous systems, where business agreements and other policy considerations affect routing decisions.
 
@@ -9,8 +8,6 @@ This assignment focuses on intra-domain routing algorithms used by routers withi
 The need to rapidly handle unexpected router or link failures, changing link costs (usually depending on traffic volume), and connections from new routers and clients, motivates the use of distributed algorithms for intra-domain routing.  In these distributed algorithms, routers start with only their local state and must communicate with each other to learn lowest cost paths.
 
 Nearly all intra-domain routing algorithms used in real-world networks fall into one of two categories, distance-vector or link-state.  In this assignment, you will implement distributed  distance-vector and link-state routing algorithms in Python and test them with a provided network simulator.
-
-**This assignment can be done individually or in groups of 2 students. You are only required to implement either distance-vector or link-state. If you implement both, you can get a bonus of two points.**
 
 ## Background
 
