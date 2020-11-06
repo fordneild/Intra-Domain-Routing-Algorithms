@@ -19,7 +19,22 @@ class LSrouter(Router):
         Router.__init__(self, addr)  # initialize superclass - don't remove
         self.heartbeatTime = heartbeatTime
         self.last_time = 0
+        #save the addr so that we can index into local state properly
+        #self.addr = addr
         # Hints: initialize local state
+        # The below is from the README.md
+        # Each router keeps its own link state and other nodes' link states it receives. 
+        # The link state of a router contains the links and their weights between the router and its neighbors.
+        # could use dict that looks like this:
+        # self.localState = {
+        #   addr1: linkStateOfThisAddress
+        #   addr2: linkStateOfThisAddress
+        # }
+
+        # linkStateOfThisAddress = {
+        #   addressOfNeighbor1: weight of path to this neighbor
+        #   addressOfNeighbor2: weight of path to this neighbor
+        # }
         pass
 
 
