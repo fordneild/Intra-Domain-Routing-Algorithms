@@ -48,10 +48,6 @@ class LSrouter(Router):
             endpoints = packetContent["endpoints"]
             nodeItStartedFrom = packet.srcAddr
 
-            #TODO do we need this?
-            #if we are the ones that sent this link state, then discard it
-            # if(nodeItStartedFrom == self.addr):
-            #     return
             # if we havent gotten info from this node before or its new info, then we should process it
             if(nodeItStartedFrom not in self.nodeToLastPacketSeqNum or seqNum > self.nodeToLastPacketSeqNum[nodeItStartedFrom]):
                 # we saw a newer link state, so update this counter
