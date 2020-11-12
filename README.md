@@ -7,7 +7,7 @@ This assignment focuses on intra-domain routing algorithms used by routers withi
 
 The need to rapidly handle unexpected router or link failures, changing link costs (usually depending on traffic volume), and connections from new routers and clients, motivates the use of distributed algorithms for intra-domain routing.  In these distributed algorithms, routers start with only their local state and must communicate with each other to learn lowest cost paths.
 
-Nearly all intra-domain routing algorithms used in real-world networks fall into one of two categories, distance-vector or link-state.  In this assignment, you will implement distributed  distance-vector and link-state routing algorithms in Python and test them with a provided network simulator.
+Nearly all intra-domain routing algorithms used in real-world networks fall into one of two categories, distance-vector or link-state. Here, I implemented distributed  distance-vector and link-state routing algorithms in Python and tested them with a network simulator.
 
 ### Distance-Vector Routing
 
@@ -49,22 +49,6 @@ These are the methods you need to complete in `DVrouter` and `LSrouter`:
 
 * `debugString(self)`
   * This method is called by the network visualization to print current details about the router.  It should return any string that will be helpful for debugging. This method is for your own use and will not be graded.
-
-### Creating and sending packets
-
-You will need to create packets to send information between routers using the `Packet` class defined in `packet.py`. Any packet `p` you create to send routing information should have `p.kind == ROUTING`.
-
-You will have to decide what to include in the `content` field of these packets. The content should be reasonable for the algorithm you are implementing (e.g. don't send an entire routing table for link-state routing).  
-
-Packet content must be a string. This is checked by an assert statement when the packet is sent. `DVrouter` and `LSrouter` import the `dumps()` and `loads()` functions which return a string (in json format) when given a python object. Using these functions is an easy way to stringify and de-stringify.
-
-You can access and set/modify any of the fields of a packet object (including `content`, `srcAddr`, `dstAdddr` and `kind`) except for `route` (see "Restrictions" above).
-
-### Link reliability
-
-If a link between two routers fails or is added, the appropriate `handle` function will *always* be called on both routers after the failure or addition.
-
-Links have varying latencies (usually proportional to their costs). Packets may not arrive in the global order that they are sent.
 
 ## Running and Testing
 
