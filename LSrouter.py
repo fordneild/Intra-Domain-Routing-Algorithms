@@ -16,7 +16,6 @@ class LSrouter(Router):
     """Link state routing protocol implementation."""
 
     def __init__(self, addr, heartbeatTime):
-        """TODO: add your own class fields and initialization code here"""
         Router.__init__(self, addr)  # initialize superclass - don't remove
         self.heartbeatTime = heartbeatTime
         self.last_time = 0
@@ -82,7 +81,6 @@ class LSrouter(Router):
                         self.send(portNum, Packet("ROUTING",nodeItStartedFrom, target, packet.content))
 
     def handleNewLink(self, port, endpoint, cost):
-        # Hints:
         self.updateMyLinkState()
         # update graph
         strEndpoint = str(endpoint)
@@ -113,11 +111,9 @@ class LSrouter(Router):
 
 
     def handleTime(self, timeMillisecs):
-        """TODO: handle current time"""
         if timeMillisecs - self.last_time >= self.heartbeatTime:
             self.last_time = timeMillisecs
             self.broadcast()
-            pass
 
     def updateForwardTable(self):
         # update the forwarding table
@@ -180,7 +176,6 @@ class LSrouter(Router):
                 
 
     def debugString(self):
-        """TODO: generate a string for debugging in network visualizer"""
         res=""
         # res = str(self.links) + "\n"
         for line in nx.generate_edgelist(self.G, data=True):
