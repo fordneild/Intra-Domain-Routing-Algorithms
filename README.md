@@ -1,3 +1,9 @@
+## Quick start
+
+1. Clone the repo
+2. Run `python visualize_network.py [networkSimulationFile.json] [DV|LS]`
+
+
 ## Intra-Domain Routing Algorithms
 
 
